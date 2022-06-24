@@ -21,7 +21,12 @@
     if ([self isBetweenFromHour:18 toHour:6]) {
         string = @"Good evening";
     }
-    NSLog(@"%@", string);
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:string preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *action = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:nil];
+    [alertController addAction:action];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:alertController animated:YES completion:nil];
+    });
 }
 
 - (BOOL)isBetweenFromHour:(NSInteger)fromHour toHour:(NSInteger)toHour
